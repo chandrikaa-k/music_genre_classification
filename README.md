@@ -8,6 +8,9 @@ This project uses machine learning to classify songs into genres based on audio 
 - K-Nearest Neighbors (KNN)
 - Support Vector Machine (SVM)
 
+## Dataset
+https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset
+
 ## Features Used
 - Tempo
 - Loudness
