@@ -20,7 +20,7 @@ https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset
 - Valence
 
 ## Results
-The models were evaluated using accuracy, and SVM performed the best among all.
+The models were evaluated using accuracy, KNN achieved the highest performance, while ensemble learning improved overall results
 
 ## How to Run
 1. Install required libraries:
