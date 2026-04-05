@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,6 +9,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
+from sklearn.ensemble import VotingClassifier
 
 data = pd.read_csv("ML_project_train.csv")
 data = data.dropna()
@@ -35,23 +34,36 @@ lr = LogisticRegression(max_iter=300)
 knn = KNeighborsClassifier(n_neighbors=5)
 svm = SVC()
 
+ensemble = VotingClassifier(
+    estimators=[
+        ('lr', lr),
+        ('knn', knn),
+        ('svm', svm)
+    ],
+    voting='hard'
+)
+
 lr.fit(X_train, y_train)
 knn.fit(X_train, y_train)
 svm.fit(X_train, y_train)
+ensemble.fit(X_train, y_train)
 
 lr_pred = lr.predict(X_test)
 knn_pred = knn.predict(X_test)
 svm_pred = svm.predict(X_test)
+ensemble_pred = ensemble.predict(X_test)
 
 print("Logistic Regression:", accuracy_score(y_test, lr_pred))
 print("KNN:", accuracy_score(y_test, knn_pred))
 print("SVM:", accuracy_score(y_test, svm_pred))
+print("Ensemble:", accuracy_score(y_test, ensemble_pred))
 
-models = ['LR', 'KNN', 'SVM']
+models = ['LR', 'KNN', 'SVM', 'Ensemble']
 accuracies = [
     accuracy_score(y_test, lr_pred),
     accuracy_score(y_test, knn_pred),
-    accuracy_score(y_test, svm_pred)
+    accuracy_score(y_test, svm_pred),
+    accuracy_score(y_test, ensemble_pred)
 ]
 
 plt.bar(models, accuracies)
@@ -63,5 +75,5 @@ plt.show()
 sample = np.array([[120, -5, 0.8, 0.7, 0.3, 0.6]])
 sample = scaler.transform(sample)
 
-print("Prediction (Best Model - SVM):")
-print(genre_names[svm.predict(sample)[0]])
+print("Prediction (Ensemble):")
+print(genre_names[ensemble.predict(sample)[0]])
