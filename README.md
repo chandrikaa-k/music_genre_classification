@@ -7,6 +7,9 @@ This project uses machine learning to classify songs into genres based on audio 
 - Logistic Regression
 - K-Nearest Neighbors (KNN)
 - Support Vector Machine (SVM)
+- Voting Ensemble Method
+
+The project uses Logistic Regression, KNN, and SVM for classification, along with a Voting Ensemble method to combine model predictions.
 
 ## Dataset
 https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset
